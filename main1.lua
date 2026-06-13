@@ -8,7 +8,28 @@ local tab4 = Main:CreateTab("UI")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+local LocalPlayer = Players.LocalPlayer\
+
+-- <<< Paste the CORRECT DIRECT RAW URL here >>>
+local targetScriptURL = "https://raw.githubusercontent.com/xas14820-arch/main1.lua/main/main1.lua" -- Example of what the URL should look like
+
+local success, response = pcall(function()
+    return httpService:GetAsync(targetScriptURL)
+end)
+
+if success then
+    local scriptContent = response
+    local successLoad, loadedFunction = pcall(loadstring(scriptContent))
+    
+    if successLoad then
+        loadedFunction() -- Execute the downloaded script
+        print("Successfully loaded and executed script from: " .. targetScriptURL)
+    else
+        warn("Failed to loadstring the script. Error: " .. tostring(loadedFunction))
+    end
+else
+    warn("Failed to download script from URL: " .. targetScriptURL .. ". Error: " .. tostring(response))
+end
 
 -- ESP Config
 local espEnabled = false
